@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLOUD STORE | CYBERPUNK TOP UP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Orbitron',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#050816;
+color:white;
+overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body::before{
+content:'';
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top,#ff004c33,transparent 40%),
+radial-gradient(circle at bottom,#00fff733,transparent 40%);
+z-index:-2;
+animation:bgmove 8s infinite alternate;
+}
+
+@keyframes bgmove{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
+}
+
+/* PARTICLES */
+
+.particle{
+position:fixed;
+width:4px;
+height:4px;
+background:#00fff7;
+border-radius:50%;
+box-shadow:0 0 10px #00fff7;
+animation:float linear infinite;
+z-index:-1;
+}
+
+@keyframes float{
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+50%{
+opacity:1;
+}
+100%{
+transform:translateY(-100vh);
+opacity:0;
+}
+}
+
+/* MAIN LOADER */
+
+#loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:99999;
+}
+
+.loader-text{
+font-size:2rem;
+color:#00fff7;
+text-shadow:0 0 20px #00fff7;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+50%{opacity:0.4;}
+}
+
+.bar{
+width:300px;
+height:10px;
+border:1px solid #00fff7;
+margin-top:20px;
+overflow:hidden;
+border-radius:20px;
+}
+
+.fill{
+height:100%;
+width:0%;
+background:#00fff7;
+animation:loading 3s linear forwards;
+}
+
+@keyframes loading{
+100%{width:100%;}
+}
+
+/* PAYMENT LOADER */
+
+#payLoader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999999;
+}
+
+.payText{
+font-size:2rem;
+color:#00fff7;
+text-shadow:0 0 20px #00fff7;
+animation:blink 1s infinite;
+}
+
+.payBar{
+width:300px;
+height:10px;
+border:1px solid #00fff7;
+margin-top:20px;
+overflow:hidden;
+border-radius:20px;
+}
+
+.payFill{
+height:100%;
+width:0%;
+background:#00fff7;
+animation:payload 2s linear forwards;
+}
+
+@keyframes payload{
+100%{
+width:100%;
+}
+}
+
+/* HEADER */
+
+header{
+text-align:center;
+padding:50px 20px;
+}
+
+header h1{
+font-size:4rem;
+color:#00fff7;
+text-shadow:0 0 25px #00fff7;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #00fff7;}
+to{text-shadow:0 0 35px #00fff7;}
+}
+
+header p{
+margin-top:10px;
+color:#bbb;
+}
+
+/* CONTAINER */
+
+.container{
+width:90%;
+max-width:1400px;
+margin:auto;
+}
+
+/* TITLES */
+
+.section-title{
+text-align:center;
+margin-top:80px;
+font-size:3rem;
+color:#ff004c;
+text-shadow:0 0 20px #ff004c;
+}
+
+/* CARDS */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+gap:30px;
+margin-top:50px;
+}
+
+.card{
+position:relative;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+padding:30px;
+border-radius:25px;
+backdrop-filter:blur(10px);
+overflow:hidden;
+transition:0.5s;
+transform-style:preserve-3d;
+}
+
+.card:hover{
+transform:rotateY(8deg) rotateX(5deg) translateY(-12px);
+box-shadow:0 0 40px #00fff755;
+}
+
+.card::before{
+content:'';
+position:absolute;
+width:200%;
+height:60px;
+background:linear-gradient(90deg,transparent,#00fff755,transparent);
+top:-20px;
+left:-150%;
+transform:rotate(25deg);
+animation:shine 5s infinite;
+}
+
+@keyframes shine{
+100%{
+left:150%;
+}
+}
+
+.offer-tag{
+position:absolute;
+top:18px;
+right:-40px;
+background:#ff004c;
+padding:8px 45px;
+transform:rotate(45deg);
+font-size:0.7rem;
+font-weight:bold;
+box-shadow:0 0 20px #ff004c;
+}
+
+.card h2{
+color:#00fff7;
+margin-bottom:15px;
+}
+
+.card p{
+color:#bbb;
+line-height:1.6;
+}
+
+.price{
+font-size:2rem;
+margin:20px 0;
+color:#ffcc00;
+text-shadow:0 0 10px #ffcc00;
+}
+
+/* BUTTON */
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#00fff7;
+color:black;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+font-size:1rem;
+position:relative;
+overflow:hidden;
+z-index:1;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #00fff7;
+}
+
+/* FIRE PARTICLES */
+
+.fire-particle{
+position:absolute;
+width:12px;
+height:12px;
+border-radius:50%;
+pointer-events:none;
+z-index:999;
+background:radial-gradient(circle,yellow 0%,orange 40%,red 80%);
+box-shadow:
+0 0 10px orange,
+0 0 20px red,
+0 0 30px yellow;
+animation:fireMove 1s linear forwards;
+}
+
+@keyframes fireMove{
+
+0%{
+transform:translate(0,0) scale(1);
+opacity:1;
+}
+
+100%{
+transform:
+translate(
+calc((var(--x) - 0.5) * 250px),
+calc((var(--y) - 1) * 250px)
+)
+scale(0);
+opacity:0;
+}
+
+}
+
+/* VIP */
+
+.vip-cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.vip{
+padding:35px;
+border-radius:25px;
+background:linear-gradient(145deg,#111,#1d1d1d);
+border:1px solid #ff004c55;
+transition:0.5s;
+}
+
+.vip:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 0 40px #ff004c55;
+}
+
+.vip h2{
+color:#ff004c;
+margin-bottom:20px;
+}
+
+/* UID */
+
+.uid-panel{
+display:flex;
+justify-content:center;
+margin-top:70px;
+}
+
+.uid-box{
+width:100%;
+max-width:650px;
+background:rgba(255,255,255,0.05);
+padding:35px;
+border-radius:25px;
+border:1px solid #00fff755;
+backdrop-filter:blur(10px);
+box-shadow:0 0 30px #00fff722;
+animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+50%{
+transform:scale(1.02);
+}
+}
+
+.uid-box h2{
+text-align:center;
+margin-bottom:25px;
+color:#00fff7;
+text-shadow:0 0 15px #00fff7;
+}
+
+.uid-box input,
+.uid-box select{
+width:100%;
+padding:15px;
+margin-top:15px;
+background:#0d111f;
+border:1px solid #00fff755;
+border-radius:12px;
+outline:none;
+color:white;
+font-size:1rem;
+}
+
+.uid-box button{
+margin-top:20px;
+}
+
+#uidResult{
+margin-top:20px;
+text-align:center;
+color:#00ff88;
+}
+
+/* QR */
+
+.qr-section{
+text-align:center;
+margin-top:90px;
+}
+
+.qr-box{
+display:inline-block;
+padding:25px;
+background:rgba(255,255,255,0.05);
+border-radius:25px;
+border:1px solid #00fff755;
+box-shadow:0 0 25px #00fff733;
+animation:pulse 2s infinite;
+}
+
+.qr-box img{
+width:280px;
+border-radius:20px;
+}
+
+/* SHARE PROOF */
+
+.share-proof{
+margin-top:70px;
+text-align:center;
+padding:40px 20px;
+background:rgba(255,255,255,0.05);
+border:1px solid #00fff744;
+border-radius:25px;
+box-shadow:0 0 30px #00fff722;
+animation:pulse 3s infinite;
+}
+
+.share-proof h2{
+font-size:2rem;
+color:#00fff7;
+text-shadow:0 0 15px #00fff7;
+margin-bottom:15px;
+}
+
+.share-proof p{
+color:#bbb;
+margin-bottom:25px;
+}
+
+.social-box{
+display:flex;
+flex-direction:column;
+gap:20px;
+align-items:center;
+}
+
+.social-box a{
+text-decoration:none;
+color:white;
+background:linear-gradient(45deg,#ff004c,#00fff7);
+padding:15px 25px;
+border-radius:15px;
+font-weight:bold;
+transition:0.4s;
+box-shadow:0 0 20px #00fff744;
+}
+
+.social-box a:hover{
+transform:scale(1.08);
+box-shadow:0 0 35px #00fff7;
+}
+
+footer{
+text-align:center;
+padding:40px;
+color:#888;
+margin-top:60px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- MAIN LOADER -->
+
+<div id="loader">
+<div class="loader-text">ACCESSING CLOUD STORE...</div>
+
+<div class="bar">
+<div class="fill"></div>
+</div>
+</div>
+
+<!-- PARTICLES -->
+
+<div class="particle" style="left:10%;animation-duration:8s;"></div>
+<div class="particle" style="left:20%;animation-duration:10s;"></div>
+<div class="particle" style="left:30%;animation-duration:6s;"></div>
+<div class="particle" style="left:40%;animation-duration:12s;"></div>
+<div class="particle" style="left:50%;animation-duration:9s;"></div>
+<div class="particle" style="left:60%;animation-duration:7s;"></div>
+<div class="particle" style="left:70%;animation-duration:13s;"></div>
+<div class="particle" style="left:80%;animation-duration:11s;"></div>
+<div class="particle" style="left:90%;animation-duration:9s;"></div>
+
+<header>
+<h1>CLOUD STORE</h1>
+<p>CYBERPUNK FREE FIRE TOP-UP DASHBOARD</p>
+</header>
+
+<div class="container">
+
+<!-- DIAMOND SECTION -->
+
+<div class="cards">
+
+<div class="card">
+<div class="offer-tag">HOT</div>
+<h2>💎 500 Diamonds</h2>
+<p>Fast Delivery + Secure</p>
+<div class="price">₹80</div>
+<button onclick="buy(this)">BUY NOW</button>
+</div>
+
+<div class="card">
+<h2>💎 2000 Diamonds</h2>
+<p>Popular Diamond Pack</p>
+<div class="price">₹240</div>
+<button onclick="buy(this)">BUY NOW</button>
+</div>
+
+<div class="card">
+<div class="offer-tag">BEST</div>
+<h2>💎 5000 Diamonds</h2>
+<p>Extra Bonus Rewards</p>
+<div class="price">₹400</div>
+<button onclick="buy(this)">BUY NOW</button>
+</div>
+
+<div class="card">
+<h2>💎 11000 Diamonds</h2>
+<p>Premium Top Up</p>
+<div class="price">₹800</div>
+<button onclick="buy(this)">BUY NOW</button>
+</div>
+
+<div class="card">
+<div class="offer-tag">VIP</div>
+<h2>💎 30000 Diamonds</h2>
+<p>Ultimate Gamer Pack</p>
+<div class="price">₹4000</div>
+<button onclick="buy(this)">BUY NOW</button>
+</div>
+
+<div class="card">
+<h2>💎 Weekly Membership</h2>
+<p>7 Days Premium Rewards</p>
+<div class="price">₹159</div>
+<button onclick="buy(this)">BUY NOW</button>
+</div>
+
+<div class="card">
+<h2>👑 Level Up Pass</h2>
+<p>Elite Pass Rewards</p>
+<div class="price">₹299</div>
+<button onclick="buy(this)">BUY NOW</button>
+</div>
+
+<div class="card">
+<div class="offer-tag">NEW</div>
+<h2>🔥 EVO Upgrade</h2>
+<p>Instant Evo Tokens</p>
+<div class="price">₹499</div>
+<button onclick="buy(this)">BUY NOW</button>
+</div>
+
+<div class="card">
+<h2>🎁 Mystery Crate</h2>
+<p>Random Premium Rewards</p>
+<div class="price">₹99</div>
+<button onclick="buy(this)">OPEN NOW</button>
+</div>
+
+</div>
+
+<!-- VIP -->
+
+<h1 class="section-title">VIP ACCESS CARDS</h1>
+
+<div class="vip-cards">
+
+<div class="vip">
+<h2>⚡ SILVER VIP</h2>
+<p>19K → 30K Premium Access</p>
+<div class="price">₹1800</div>
+<button onclick="buy(this)">ACTIVATE</button>
+</div>
+
+<div class="vip">
+<h2>🔥 GOLD VIP</h2>
+<p>30K → 90K Premium Access</p>
+<div class="price">₹3000</div>
+<button onclick="buy(this)">ACTIVATE</button>
+</div>
+
+<div class="vip">
+<h2>👑 LEGEND VIP</h2>
+<p>1 Lakh → 2 Lakh Elite Access</p>
+<div class="price">₹5000</div>
+<button onclick="buy(this)">ACTIVATE</button>
+</div>
+
+</div>
+
+<!-- UID -->
+
+<h1 class="section-title">TOP UP PLAYER UID</h1>
+
+<div class="uid-panel">
+
+<div class="uid-box">
+
+<h2>ENTER FREE FIRE UID</h2>
+
+<input type="number" id="uid" placeholder="Enter Player UID">
+
+<select id="service">
+<option>Select Service</option>
+<option>500 Diamonds - ₹80</option>
+<option>2000 Diamonds - ₹240</option>
+<option>5000 Diamonds - ₹400</option>
+<option>11000 Diamonds - ₹800</option>
+<option>30000 Diamonds - ₹4000</option>
+<option>Weekly Membership - ₹159</option>
+<option>Level Up Pass - ₹299</option>
+<option>Silver VIP Card - ₹1800</option>
+<option>Gold VIP Card - ₹3000</option>
+<option>Legend VIP Card - ₹5000</option>
+</select>
+
+<button onclick="submitUID(this)">PROCEED PAYMENT</button>
+
+<div id="uidResult"></div>
+
+</div>
+
+</div>
+
+<!-- QR -->
+
+<div class="qr-section">
+
+<div class="qr-box">
+
+<h2 style="margin-bottom:20px;color:#00fff7;">
+SCAN & PAY
+</h2>
+
+<!-- SAVE YOUR QR IMAGE AS qr.jpg -->
+<img src="IMG_2928.jpg" alt="QR CODE">
+
+<p style="margin-top:15px;color:#bbb;">
+UPI / WALLET ACCEPTED
+</p>
+
+</div>
+
+</div>
+
+<!-- SHARE PROOF -->
+
+<div class="share-proof">
+
+<h2>AFTER PAYMENT SHARE SCREENSHOT</h2>
+
+<p>
+Send Payment Screenshot & UID To Admin
+</p>
+
+<div class="social-box">
+
+<a href="https://instagram.com/_cloud_official_store" target="_blank">
+📸 Instagram : @_cloud_official_store_
+</a>
+
+<a href="https://t.me/cloud_official_store" target="_blank">
+✈ Telegram : @_cloud_official_store_
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© CLOUD STORE | CYBERPUNK GAMER DASHBOARD
+</footer>
+
+<!-- SOUND -->
+
+<audio id="sound">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=click-124467.mp3">
+</audio>
+
+<script>
+
+/* MAIN LOADER */
+
+setTimeout(()=>{
+document.getElementById("loader").style.display="none";
+},3000);
+
+/* FIRE EFFECT */
+
+function createFireExplosion(button){
+
+let rect = button.getBoundingClientRect();
+
+for(let i=0;i<35;i++){
+
+let fire=document.createElement("span");
+
+fire.className="fire-particle";
+
+fire.style.left=(rect.left + rect.width/2)+"px";
+fire.style.top=(rect.top + rect.height/2)+"px";
+
+fire.style.setProperty('--x',Math.random());
+fire.style.setProperty('--y',Math.random());
+
+document.body.appendChild(fire);
+
+setTimeout(()=>{
+fire.remove();
+},1000);
+
+}
+
+}
+
+/* BUY FUNCTION */
+
+function buy(btn){
+
+document.getElementById("sound").play();
+
+createFireExplosion(btn);
+
+let loading=document.createElement("div");
+
+loading.innerHTML=`
+<div id="payLoader">
+<div class="payText">PROCESSING PAYMENT...</div>
+
+<div class="payBar">
+<div class="payFill"></div>
+</div>
+</div>
+`;
+
+document.body.appendChild(loading);
+
+setTimeout(()=>{
+
+document.getElementById("payLoader").remove();
+
+document.querySelector(".qr-section").scrollIntoView({
+behavior:"smooth"
+});
+
+},2000);
+
+}
+
+/* UID FUNCTION */
+
+function submitUID(btn){
+
+let uid=document.getElementById("uid").value;
+let service=document.getElementById("service").value;
+
+if(uid==="" || service==="Select Service"){
+alert("Please Enter UID & Select Service");
+return;
+}
+
+document.getElementById("sound").play();
+
+createFireExplosion(btn);
+
+let loading=document.createElement("div");
+
+loading.innerHTML=`
+<div id="payLoader">
+<div class="payText">VERIFYING UID...</div>
+
+<div class="payBar">
+<div class="payFill"></div>
+</div>
+</div>
+`;
+
+document.body.appendChild(loading);
+
+setTimeout(()=>{
+
+document.getElementById("payLoader").remove();
+
+document.getElementById("uidResult").innerHTML=
+"✔ UID : "+uid+
+"<br><br>✔ Selected : "+service+
+"<br><br>✔ Scroll Down & Scan QR Code";
+
+document.querySelector(".qr-section").scrollIntoView({
+behavior:"smooth"
+});
+
+},2000);
+
+}
+
+</script>
+
+</body>
+</html>
